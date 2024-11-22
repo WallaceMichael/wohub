@@ -1,0 +1,7 @@
+{
+  "name": "wohub-frontend",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue-vite"
+}

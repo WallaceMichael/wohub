@@ -1,0 +1,9 @@
+INSERT INTO `wo-hub`.`artigos` (`id`, `titulo`, `descricao`, `categoria`, `foto`, `usuarios_id`) VALUES ('1', 'Artigo 1', 'Desc 1', 'Dev', 'image.jpg', '1');
+INSERT INTO `wo-hub`.`artigos` (`id`, `titulo`, `descricao`, `categoria`, `foto`, `usuarios_id`) VALUES ('2', 'Artigo 2', 'Desc 2', 'UX', 'image.jpg', '2');
+INSERT INTO `wo-hub`.`artigos` (`id`, `titulo`, `descricao`, `categoria`, `foto`, `usuarios_id`) VALUES ('3', 'Artigo 3', 'Desc 3', 'Dev', 'image.jpg', '1');
+
+
+INSERT INTO `wo-hub`.`comentarios` (`id`, `usuario_id`, `data_comentario`, `texto`, `artigos_id`) VALUES ('1', '2', NOW(), 'Odiei', '1');
+INSERT INTO `wo-hub`.`comentarios` (`id`, `usuario_id`, `data_comentario`, `texto`, `artigos_id`) VALUES ('2', '1', NOW(), 'Quem?', '1');
+INSERT INTO `wo-hub`.`comentarios` (`id`, `usuario_id`, `data_comentario`, `texto`, `artigos_id`) VALUES ('3', '2', NOW(), 'Quem oq?', '1');
+INSERT INTO `wo-hub`.`comentarios` (`id`, `usuario_id`, `data_comentario`, `texto`, `artigos_id`) VALUES ('4', '1', NOW(), 'Perguntou?', '1');
