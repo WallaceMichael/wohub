@@ -4,7 +4,7 @@
       <ion-toolbar class="ion-padding">
         <ion-buttons slot="start">
           <ion-button>
-            <ion-img src="wohub_logo_complete.png" style="width: 118px;height: 31px;"></ion-img>
+            <ion-img  router-link="/main" router-direction="forward" src="./wohub_logo_complete.png" style="width: 118px;height: 31px;"></ion-img>
           </ion-button>
         </ion-buttons>
         <ion-title>

@@ -54,7 +54,7 @@
                   </div>
 
                   <ion-item>
-                    <ion-button id="login_form_button_access" class="ion-padding-vertical" style="width: 100%"
+                    <ion-button router-link="/main" router-direction="forward" id="login_form_button_access" class="ion-padding-vertical" style="width: 100%"
                                 expand="block">Acessar
                     </ion-button>
                   </ion-item>

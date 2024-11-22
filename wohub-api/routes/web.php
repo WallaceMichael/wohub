@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\ArtigosController;
 
-Route::group(['prefix' => 'api/v1', 'middleware' => 'web'], function () {
+Route::group(['prefix' => 'api', 'middleware' => 'web'], function () {
     Route::group(['prefix' => 'usuarios'], function () {
         Route::get('/', [UsuarioController::class, 'index']); // RETORNA TODOS OS USUARIOS
         Route::get('/{id}', [UsuarioController::class, 'show']); // RETORNA USUARIO ONDE O ID É IGUAL
