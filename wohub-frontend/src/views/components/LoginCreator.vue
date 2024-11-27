@@ -29,7 +29,7 @@
                   <ion-item>
                     <ion-label>
                       E-mail
-                      <ion-input class="ion-padding-start"></ion-input>
+                      <ion-input v-model="email" class="ion-padding-start"></ion-input>
                     </ion-label>
 
 
@@ -37,7 +37,7 @@
                   <ion-item>
                     <ion-label>
                       Senha
-                      <ion-input type="password" class="ion-padding-start">
+                      <ion-input v-model="password" type="password" class="ion-padding-start">
                         <ion-input-password-toggle slot="end"></ion-input-password-toggle>
                       </ion-input>
                     </ion-label>
@@ -54,7 +54,7 @@
                   </div>
 
                   <ion-item>
-                    <ion-button  router-link="/main" router-direction="forward" id="login_form_button_access" class="ion-padding-vertical" style="width: 100%"
+                    <ion-button @click="requestLogin" id="login_form_button_access" class="ion-padding-vertical" style="width: 100%"
                                 expand="block">Acessar
                     </ion-button>
                   </ion-item>
@@ -119,9 +119,20 @@ export default {
     IonInputPasswordToggle
   },
   emits: ["profileSelected"],
+  data(){
+    const email = "";
+    const password = "";
+    return{
+      email,
+      password
+    }
+  },
   methods: {
     selectProfile(profileId: number) {
       this.$emit("profileSelected", profileId);
+    },
+    requestLogin(){
+      alert(this.email)
     }
   }
 }

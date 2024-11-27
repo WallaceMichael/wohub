@@ -42,13 +42,13 @@
         </ion-button>
       </ion-menu>
 
-      <div class="ion-page" id="main">
+      <div class="ion-page" id="main" style="overflow: auto">
         <ion-header class="ion-no-border">
           <ion-toolbar>
             <div slot="end" class="d-flex" style="direction: rtl!important">
               <ion-item lines="none">
                 <ion-avatar slot="start">
-                  <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg"/>
+                  <img  src="https://ionicframework.com/docs/img/demos/avatar.svg"/>
                 </ion-avatar>
                 <div>
                   <ion-label>Maria Joaquina</ion-label>
@@ -67,27 +67,8 @@
             </div>
           </ion-toolbar>
         </ion-header>
-        <ion-content color="white">
-          <ion-grid class="d-flex flex-column" style="height: 100%;">
-            <ion-row>
-              <div id="background_screen">
-                <ion-row style="height: 100%">
-                  <ion-col id="background_screen_text" size="7">
-                      <ion-text style="color: white"><h1>Sejam bem vindes</h1></ion-text>
-                  </ion-col>
-                  <ion-col size="5">
-                    <ion-img id="background_screen_img" src="woman_wearing_glasses.png"></ion-img>
-                  </ion-col>
-
-                </ion-row>
-              </div>
-            </ion-row>
-            <ion-row >
-              <ion-col size="12" style="height: 100%">
-                <ion-router-outlet />
-              </ion-col>
-            </ion-row>
-          </ion-grid>
+        <ion-content>
+          <ion-router-outlet/>
         </ion-content>
       </div>
     </ion-split-pane>
@@ -118,6 +99,7 @@ import {
   IonRouterOutlet
 } from '@ionic/vue';
 import {defineComponent} from 'vue';
+import {useRoute} from 'vue-router';
 
 export default defineComponent({
   components: {
@@ -142,15 +124,18 @@ export default defineComponent({
     IonGrid,
     IonRouterOutlet
   },
+  setup() {
+    return {};
+  }
 });
 </script>
 
-<style scoped>
+<style>
 .d-flex {
   display: flex !important;
 }
 
-.flex-column{
+.flex-column {
   flex-direction: column;
 }
 
@@ -172,10 +157,11 @@ ion-item-divider {
 
 }
 
-#background_screen_img{
-  height: 24vh!important;
+#background_screen_img {
+  height: 24vh !important;
 }
-#background_screen_text{
+
+#background_screen_text {
   background: linear-gradient(270.03deg, rgba(242, 244, 248, 0) 0.02%, #9747FF 55.28%);
 }
 

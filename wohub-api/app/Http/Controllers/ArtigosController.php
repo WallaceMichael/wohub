@@ -48,7 +48,7 @@ class ArtigosController extends Controller
     }
 
     // Display the specified resource.
-    public function show(Artigo $artigo)
+    public function show($id)
     {
         $artigo = Artigo::with(['usuario', 'comentarios.usuario'])->findOrFail($id);
 

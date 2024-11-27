@@ -12,7 +12,7 @@ import {
   IonRow,
   IonCol,
   IonGrid,
-  IonAvatar, IonItem, IonImg
+  IonAvatar, IonItem, IonImg,IonIcon
 } from "@ionic/vue";
 import {Article} from "@/models/Article";
 
@@ -32,7 +32,8 @@ export default defineComponent({
     IonRow,
     IonCol,
     IonGrid,
-    IonImg
+    IonImg,
+    IonIcon
   },
   props: {
     article: {
@@ -50,7 +51,7 @@ export default defineComponent({
     <ion-card-header class="ion-no-padding">
       <ion-item lines="none">
         <ion-avatar slot="start">
-          <img alt="Silhouette of a person's head" :src="article.usuario.foto"/>
+          <img :src="article.usuario.foto"/>
         </ion-avatar>
         <div>
           <ion-label><b>{{ article.usuario.nome }}</b> <span style="color:var(--ion-color-primary);">Front-end</span>
@@ -58,12 +59,12 @@ export default defineComponent({
         </div>
       </ion-item>
       <div class="ion-padding">
-        <ion-card-subtitle><b>{{ article.categoria }}</b></ion-card-subtitle>
-        <ion-card-title><b>{{ article.titulo }}</b></ion-card-title>
+        <ion-card-subtitle style="font-weight: 500;font-size: 16px;line-height: 17px;">{{ article.categoria }}</ion-card-subtitle>
+        <ion-card-title style="font-size: 32px;font-weight: 700;line-height: 35px;">{{ article.titulo }}</ion-card-title>
       </div>
     </ion-card-header>
 
-    <ion-card-content class="ion-padding">
+    <ion-card-content class="">
       <ion-text class="">
         {{ article.descricao }}
       </ion-text>
@@ -72,20 +73,28 @@ export default defineComponent({
 
     <ion-row>
       <ion-col size="8">
-        <ion-button fill="solid" expand="block">Acessar</ion-button>
+        <ion-button fill="solid" expand="block"  class="text-white">Acessar</ion-button>
       </ion-col>
       <ion-col size="4">
-        <ion-button fill="solid" expand="block">Guardar</ion-button>
+        <ion-button fill="solid" expand="block" class="text-white">
+          <slot start>
+            <ion-icon name="calendar" class="ion-padding-end"></ion-icon>
+          </slot>
+          Guardar</ion-button>
       </ion-col>
     </ion-row>
     </ion-col>
       <ion-col size="3" class="ion-align-self-center">
-        <ion-img :src="article.foto"></ion-img>
+        <img :src="article.foto"></img>
       </ion-col>
     </ion-row>
   </ion-card>
 </template>
 
 <style scoped>
-
+.text-white{
+  color:white;
+  font-weight: 500;
+  line-height: 17px;
+}
 </style>

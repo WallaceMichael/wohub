@@ -5,6 +5,9 @@ const api = axios.create({
     timeout: 5000, // Optional: Set a timeout for requests
 });
 
+api.defaults.withCredentials = true;
+api.defaults.withXSRFToken = true;
+
 // Example: Add a request interceptor (optional)
 api.interceptors.request.use(
     (config) => {
