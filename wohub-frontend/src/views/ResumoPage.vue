@@ -14,11 +14,11 @@
 
         </ion-title>
         <ion-buttons slot="end">
-          <ion-button router-link="/login" router-direction="forward" class="btn-border" color="primary" fill="outline" >
+          <ion-button router-link="/login" router-direction="root" class="btn-border" color="primary" fill="outline" >
             <ion-text class="ion-padding">
               Login
             </ion-text></ion-button>
-          <ion-button class="btn-border" color="primary" fill="solid">
+          <ion-button router-link="/cadastro" router-direction="root" class="btn-border" color="primary" fill="solid">
             <ion-text color="light" class="ion-padding">Inscreva-se</ion-text>
           </ion-button>
         </ion-buttons>
@@ -30,11 +30,11 @@
         <ion-title>
         </ion-title>
         <ion-buttons slot="end">
-          <ion-button router-link="/login" router-direction="forward" class="btn-border" color="primary" fill="outline" >
+          <ion-button router-link="/login" router-direction="root" class="btn-border" color="primary" fill="outline" >
             <ion-text class="ion-padding">
               Login
             </ion-text></ion-button>
-          <ion-button class="btn-border" color="primary" fill="solid">
+          <ion-button router-link="/cadastro" router-direction="root" class="btn-border" color="primary" fill="solid">
             <ion-text color="light" class="ion-padding">Inscreva-se</ion-text>
           </ion-button>
         </ion-buttons>

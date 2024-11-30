@@ -9,6 +9,7 @@ import EventsPage from '@/views/EventsPage.vue';
 import MyEventsPage from '@/views/MyEventsPage.vue';
 import ResumoPage from "@/views/ResumoPage.vue";
 import ContatoPage from "@/views/ContatoPage.vue";
+import CadastroPage from "@/views/CadastroPage.vue";
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
@@ -23,6 +24,11 @@ const routes: Array<RouteRecordRaw> = [
     path: '/login',
     name: 'Login',
     component: LoginPage,
+  },
+  {
+    path: '/cadastro',
+    name: 'Cadastro',
+    component: CadastroPage,
   },
   {
     path: '/main',

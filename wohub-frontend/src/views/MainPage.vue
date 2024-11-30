@@ -4,7 +4,7 @@
     <ion-menu content-id="main">
       <ion-header class="ion-no-border">
         <ion-toolbar>
-          <ion-img class="ion-justify-self-center" router-link="/main" router-direction="forward"
+          <ion-img class="ion-justify-self-center" router-link="/main" router-direction="root"
                    src="./wohub_logo_complete.png" style="width: 118px;height: 31px;"></ion-img>
         </ion-toolbar>
       </ion-header>
@@ -61,7 +61,7 @@
             </ion-item>
           </div>
           <ion-img class="ion-justify-self-center ion-hide-sm-down ion-hide-md-up" router-link="/main"
-                   router-direction="forward"
+                   router-direction="root"
                    src="./wohub_logo_complete.png" style="width: 118px;height: 31px;"></ion-img>
           <div slot="start">
             <ion-menu-button></ion-menu-button>

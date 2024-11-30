@@ -17,6 +17,7 @@ Route::group(['prefix' => 'api'], function () {
     Route::post('/login', [AuthController::class, 'login'])->name('login');
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth:sanctum');
     Route::post('/contato', [ContatoController::class, 'store']);
+    Route::post('/usuarios', [UsuarioController::class, 'store']); // CRIAR UM USUARIO
 });
 
 Route::group(['prefix' => 'api', 'middleware' => ['web', 'auth:sanctum']], function () {
@@ -28,7 +29,6 @@ Route::group(['prefix' => 'api', 'middleware' => ['web', 'auth:sanctum']], funct
     Route::group(['prefix' => 'usuarios'], function () {
         Route::get('/', [UsuarioController::class, 'index']); // RETORNA TODOS OS USUARIOS
         Route::get('/{id}', [UsuarioController::class, 'show']); // RETORNA USUARIO ONDE O ID É IGUAL
-        Route::post('/', [UsuarioController::class, 'store']); // CRIAR UM USUARIO
         Route::put('/{id}', [UsuarioController::class, 'update']); // ATUALIZA UM USUARIO ONDE O ID É IGUAL
         Route::delete('/{id}', [UsuarioController::class, 'destroy']); // DELETE UM USUARIO ONDE O ID É IGUAL
     });

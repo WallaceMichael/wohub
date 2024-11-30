@@ -54,7 +54,7 @@
               </ion-row>
               <hr style="width:80%;height: 1px; border-top: 1px solid #DDE1E6;">
               <ion-row class="ion-justify-content-center ion-margin-top">
-                <a href="/signup" style="text-decoration: none">
+                <a href="/cadastro" style="text-decoration: none">
                   <ion-text color="dark">Ainda não tem conta? Inscrever-se</ion-text>
                 </a>
               </ion-row>
@@ -218,4 +218,4 @@ ion-input {
 #login_form_button_access {
   color: white;
 }
-</style>/
+</style>

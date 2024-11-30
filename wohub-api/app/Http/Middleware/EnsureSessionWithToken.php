@@ -10,7 +10,11 @@ class EnsureSessionWithToken
 {
     public function handle(Request $request, Closure $next)
     {
-        if ($request->is('api/login') || $request->is('api/logout') || $request->is('api/contato')) {
+        if ($request->is('api/login') ||
+            $request->is('api/logout') ||
+            $request->is('api/contato') ||
+            ($request->is('api/usuarios') && $request->method() === "POST")
+        ) {
             return $next($request);
         }
 
