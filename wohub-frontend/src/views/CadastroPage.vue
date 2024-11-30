@@ -66,7 +66,7 @@
 
                       <ion-col size="12">
                         <ion-item>
-                          <ion-input class="ms-2" label="Foto" type="file" label-placement="floating" v-model="foto"
+                          <ion-input class="ms-2" label="Foto" type="text" label-placement="floating" v-model="foto"
                                      placeholder="URL da foto (opcional)"></ion-input>
                         </ion-item>
                       </ion-col>
