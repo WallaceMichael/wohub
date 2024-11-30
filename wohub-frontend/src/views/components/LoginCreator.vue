@@ -43,18 +43,10 @@
                     </ion-label>
                   </ion-item>
 
-                  <div class="d-flex ion-justify-content-between">
-                    <ion-item>
-                      <ion-checkbox label-placement="end" justify="start">Lembre de mim</ion-checkbox>
-                    </ion-item>
-
-                    <ion-item>
-                      <a style="text-decoration: none" href="/forgot">Esqueceu sua senha?</a>
-                    </ion-item>
-                  </div>
-
                   <ion-item>
-                    <ion-button @click="requestLogin" id="login_form_button_access" class="ion-padding-vertical" style="width: 100%"
+                    <ion-button @click="requestLogin" id="login_form_button_access" class="ion-padding-vertical"
+                                :disabled="disableButton"
+                                style="width: 100%"
                                 expand="block">Acessar
                     </ion-button>
                   </ion-item>
@@ -95,6 +87,7 @@ import {
   IonCheckbox,
   IonInputPasswordToggle
 } from '@ionic/vue';
+import api from "@/services/axios";
 
 export default {
   components: {
@@ -118,21 +111,52 @@ export default {
     IonCheckbox,
     IonInputPasswordToggle
   },
-  emits: ["profileSelected"],
+  emits: ["profileSelected", "loginSuccess"],
   data(){
     const email = "";
     const password = "";
-    return{
+    const disableButton = false;
+    return {
       email,
-      password
+      password,
+      disableButton
     }
   },
   methods: {
     selectProfile(profileId: number) {
       this.$emit("profileSelected", profileId);
     },
-    requestLogin(){
-      alert(this.email)
+    requestLogin() {
+      this.disableButton = true;
+      if (!this.email || !this.password) {
+        alert("E-mail e senha são obrigatórios!")
+        this.disableButton = false;
+        return;
+      }
+
+      api.post('/login', {
+        email: this.email,
+        password: this.password,
+      }).then((res) => {
+        console.log(res)
+        const access_token = res.data.access_token;
+        const user = res.data.user;
+        if (access_token) {
+          localStorage.setItem('access_token', "Bearer " + access_token);
+          localStorage.setItem('user', JSON.stringify(user));
+          this.$emit("loginSuccess", true);
+        } else {
+          throw new Error("Access token vazio");
+        }
+        this.disableButton = false;
+      }).catch((error) => {
+        console.log("Erro ao fazer login!");
+        console.log(error);
+        console.log(error.response);
+        console.log(error.response.data);
+        alert("Erro ao fazer login, por favor, tente novamente!");
+        this.disableButton = false;
+      });
     }
   }
 }
@@ -157,7 +181,7 @@ ion-content::part(scroll) {
 
 #login_vector_part {
   margin-left:-20px;
-  background-image: url("login_vector.png");
+  background-image: url("/login_vector.png");
   background-repeat: no-repeat;
   background-position-x: right !important;
 }

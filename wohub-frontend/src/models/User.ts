@@ -6,6 +6,7 @@ export class User {
     data_criacao: string;
     tipo_usuario: string;
     foto: string;
+    cargo: string;
 
     constructor(data: Partial<User>) {
         this.id = data.id ?? 0;
@@ -15,6 +16,7 @@ export class User {
         this.data_criacao = data.data_criacao ?? '';
         this.tipo_usuario = data.tipo_usuario ?? '';
         this.foto = data.foto ?? '';
+        this.cargo = data.cargo ?? '';
     }
 
     // Example method

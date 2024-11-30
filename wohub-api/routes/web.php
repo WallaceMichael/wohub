@@ -6,37 +6,24 @@ use App\Http\Controllers\ArtigosController;
 use App\Http\Controllers\CursoController;
 use App\Http\Controllers\EventoController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ContatoController;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
+use App\Http\Middleware\EnsureSessionWithToken;
 
-
-Route::group(['prefix' => 'api', 'middleware' => ['web']], function () {
-    Route::post('/login', [AuthController::class, 'login']);
+Route::group(['prefix' => 'api'], function () {
+    Route::post('/login', [AuthController::class, 'login'])->name('login');
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth:sanctum');
+    Route::post('/contato', [ContatoController::class, 'store']);
 });
+
 Route::group(['prefix' => 'api', 'middleware' => ['web', 'auth:sanctum']], function () {
+
     Route::get('/user', function (Request $request) {
         return $request->user();
     });
-    Route::post('/sanctum/token', function (Request $request) {
-        $request->validate([
-            'email' => 'required|email',
-            'password' => 'required',
-        ]);
-
-        $user = User::where('email', $request->email)->first();
-
-        if (! $user || ! Hash::check($request->password, $user->password)) {
-            throw ValidationException::withMessages([
-                'email' => ['The provided credentials are incorrect.'],
-            ]);
-        }
-
-        return $user->createToken()->plainTextToken;
-    });
-
-    Route::post('logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
 
     Route::group(['prefix' => 'usuarios'], function () {
         Route::get('/', [UsuarioController::class, 'index']); // RETORNA TODOS OS USUARIOS
@@ -63,13 +50,13 @@ Route::group(['prefix' => 'api', 'middleware' => ['web', 'auth:sanctum']], funct
     });
 
     Route::group(['prefix' => 'eventos'], function () {
+        Route::get('/my', [EventoController::class, 'my']);
         Route::get('/', [EventoController::class, 'index']);
         Route::get('/{id}', [EventoController::class, 'show']);
         Route::post('/', [EventoController::class, 'store']);
         Route::put('/', [EventoController::class, 'update']);
         Route::delete('/', [EventoController::class, 'destroy']);
         Route::post('/subscribe/{event_id}', [EventoController::class, 'subscribe']);
-        Route::post('/my', [EventoController::class, 'getEventosByUsuario']);
 
     });
 });

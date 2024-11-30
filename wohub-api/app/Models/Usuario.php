@@ -14,8 +14,8 @@ class Usuario extends Authenticatable
 
     protected $table = 'usuarios';
 
-    protected $fillable = ['nome', 'email', 'password', 'foto', 'tipo_usuario'];
-    public $timestamps = false;
+    protected $fillable = ['nome', 'email', 'password', 'foto', 'tipo_usuario', 'cargo'];
+    public $timestamps = true;
     protected $hidden = [
         'password',
         'remember_token',
@@ -43,7 +43,7 @@ class Usuario extends Authenticatable
     // Relacionamento de um usuário para muitos comentários
     public function comentarios()
     {
-        return $this->hasMany(Comentario::class, 'usuario_id');
+        return $this->hasMany(Comentario::class, 'usuarios_id');
     }
 
     // Relacionamento de um usuário para muitas inscrições

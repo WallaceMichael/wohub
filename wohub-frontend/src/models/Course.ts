@@ -1,3 +1,5 @@
+import {User} from "@/models/User";
+
 export class Course {
     id: number;
     titulo: string;
@@ -5,6 +7,7 @@ export class Course {
     categoria: string;
     link: string;
     foto: string;
+    usuario: User;
 
     constructor(data: Partial<Course>) {
         this.id = data.id ?? 0;
@@ -13,6 +16,7 @@ export class Course {
         this.categoria = data.categoria ?? '';
         this.link = data.link ?? '';
         this.foto = data.foto ?? '';
+        this.usuario = new User(data.usuario ?? {});
     }
 
     // Example method

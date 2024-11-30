@@ -2,10 +2,10 @@
   <ion-page>
     <ion-grid class="d-flex flex-column" style="height: 100%; overflow: auto; width:100%!important;">
       <InfoHeader title="Cursos" subtitle="Cursos legais para você" image="/woman_wearing_glasses.png" />
-      <ion-row style="background: var(--ion-color-light)">
+      <ion-row>
         <div class="ion-padding ion-margin">
           <ion-row>
-            <ion-col size="3" v-for="course in courseList" :key="course.id">
+            <ion-col size="12" size-sm="6" size-md="6" size-lg="3" v-for="course in courseList" :key="course.id">
               <CourseCard :course="course"/>
             </ion-col>
           </ion-row>

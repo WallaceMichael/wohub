@@ -31,6 +31,8 @@ class ArtigosController extends Controller
             'id' => 'null|number',
             'titulo' => 'required|string|max:255',
             'descricao' => 'required|string',
+            'descricao_curta' => 'required|string',
+            'link' => 'required|string',
             'categoria' => 'required|string|max:255',
             'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'usuarios_id' => 'required|exists:usuarios,id',
@@ -71,6 +73,8 @@ class ArtigosController extends Controller
         $validatedData = $request->validate([
             'titulo' => 'required|string|max:255',
             'descricao' => 'required|string',
+            'descricao_curta' => 'required|string',
+            'link' => 'required|string',
             'categoria' => 'required|string|max:255',
             'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'usuarios_id' => 'required|exists:usuarios,id',

@@ -57,17 +57,17 @@ export default defineComponent({
       <div slot="end" class="d-flex">
         <ion-item lines="none">
           <ion-avatar slot="start">
-            <img src="https://ionicframework.com/docs/img/demos/avatar.svg"/>
+            <img :src="course.usuario.foto"/>
           </ion-avatar>
           <div>
-            <ion-label>Maria Joaquina</ion-label>
-            <ion-label color="primary">Front-end</ion-label>
+            <ion-label>{{course.usuario.nome}}</ion-label>
+            <ion-label color="primary">{{course.usuario.cargo}}</ion-label>
           </div>
         </ion-item>
       </div>
       <div class="d-flex">
         <ion-col size="12" class="ion-padding-horizontal ion-padding-top">
-        <ion-button fill="solid" expand="block" class="text-white">Acessar</ion-button>
+        <ion-button :href="course.link" target="_blank" fill="solid" expand="block" class="text-white">Acessar</ion-button>
         </ion-col>
       </div>
     </ion-card-content>
@@ -120,7 +120,7 @@ export default defineComponent({
   text-underline-position: from-font;
   text-decoration-skip-ink: none;
   display: -webkit-box;
-  -webkit-line-clamp: 3;
+  -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;

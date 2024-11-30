@@ -10,8 +10,9 @@ class Comentario extends Model
     use HasFactory;
 
     protected $table = 'comentarios';
+    public $timestamps = true;
 
-    protected $fillable = ['texto', 'usuario_id', 'artigos_id'];
+    protected $fillable = ['texto', 'usuarios_id', 'artigos_id'];
 
     // Relacionamento: Um comentário pertence a um artigo
     public function artigo()
@@ -22,6 +23,6 @@ class Comentario extends Model
     // Relacionamento: Um comentário pertence a um usuário
     public function usuario()
     {
-        return $this->belongsTo(Usuario::class, 'usuario_id');
+        return $this->belongsTo(Usuario::class, 'usuarios_id');
     }
 }

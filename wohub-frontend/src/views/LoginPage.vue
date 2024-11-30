@@ -2,7 +2,7 @@
   <ion-page>
     <ion-header class="ion-no-border">
 
-      <ion-button color="dark" router-link="/home" router-direction="back" fill="clear">
+      <ion-button color="dark" @click="backToPrevious" fill="clear">
         <ion-icon name="arrow-back-outline" class="ion-padding-end"></ion-icon>
         Voltar
       </ion-button>
@@ -11,10 +11,8 @@
 
     <ion-content :fullscreen="true" class="d-flex">
       <LoginProfileChooser v-if="!selectedProfile" @profileSelected="handleProfileSelected"/>
-      <LoginConsumer v-else-if="selectedProfile == 1"></LoginConsumer>
-      <LoginCreator v-else-if="selectedProfile == 2"></LoginCreator>
-
-
+      <LoginConsumer v-if="selectedProfile == 1" @loginSuccess="handleLoginSuccess"></LoginConsumer>
+      <LoginCreator v-else-if="selectedProfile == 2" @loginSuccess="handleLoginSuccess"></LoginCreator>
     </ion-content>
   </ion-page>
 </template>
@@ -66,16 +64,36 @@ export default {
     }
   },
   methods: {
-    handleProfileSelected(profileId) {
+    handleProfileSelected(profileId: any) {
       if (profileId === 1) {
         this.selectedProfile = profileId;
       } else if (profileId === 2) {
         this.selectedProfile = profileId;
       }
     },
+    handleLoginSuccess(state: any) {
+      if (state) {
+        this.$router.push('/main');
+        this.$nextTick(() => {
+          window.location.href = '/main';
+        });
+      }
+    },
+    backToPrevious() {
+      if(this.selectedProfile){
+        this.selectedProfile = null;
+        return;
+      }else{
+        this.$router.go(-1);
+      }
+    }
   },
   created() {
-    console.log(this.foo)
+    const user = JSON.parse(localStorage.getItem("user") ?? "null");
+    if (user) {
+      this.$router.push('/main');
+      return;
+    }
   }
 }
 </script>

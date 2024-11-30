@@ -11,7 +11,7 @@ class EventoController extends Controller
     // Display a listing of the resource.
     public function index()
     {
-        $eventos = Evento::all();
+        $eventos = Evento::with("usuario")->get();
 
         if ($eventos->isEmpty()) {
             return response()->json([], 404);
@@ -46,7 +46,7 @@ class EventoController extends Controller
     // Display the specified resource.
     public function show($id)
     {
-        $evento = Evento::findOrFail($id);
+        $evento = Evento::with("usuario")->findOrFail($id);
 
         if (!$evento) {
             return response()->json(null, 404);
@@ -85,12 +85,11 @@ class EventoController extends Controller
         return redirect()->route('eventos.index')->with('success', 'Evento excluído com sucesso!');
     }
 
-    public function getEventosByUsuario(Request $request)
+    public function my(Request $request)
     {
-        $userId = $request->input('user_id');
+        $userId = session('user_id');
 
-        // Encontrar todos os eventos associados ao usuário pelo `user_id`
-        $eventos = Evento::whereHas('inscricoes', function ($query) use ($userId) {
+        $eventos = Evento::with(["inscricoes", "usuario"])->whereHas('inscricoes', function ($query) use ($userId) {
             $query->where('usuarios_id', $userId);
         })->get();
 

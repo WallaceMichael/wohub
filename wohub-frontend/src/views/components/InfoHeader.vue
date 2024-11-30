@@ -23,7 +23,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <ion-row style="height: 100%;">
+  <ion-row style="">
     <ion-col size="12" style="height: 100%">
       <ion-row>
         <div id="background_screen">
@@ -48,7 +48,7 @@ export default defineComponent({
 #background_screen {
   width: 100vw;
   height: 25vh;
-  background-image: url("background_screens.png");
+  background-image: url("/background_screens.png");
   background-position: center;
   background-size: cover;
 

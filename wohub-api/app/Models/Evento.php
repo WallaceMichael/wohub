@@ -4,18 +4,28 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Evento extends Model
 {
     use HasFactory;
 
+    public $timestamps = true;
+
     protected $table = 'eventos';
+    protected $fillable = ['foto', 'titulo', 'descricao', 'categoria', 'link', 'tipo_evento', 'usuarios_id'];
 
-    protected $fillable = ['foto', 'titulo', 'descricao', 'categoria', 'link', 'tipo_evento'];
-
-    // Relacionamento: Um evento tem muitas inscrições
     public function inscricoes()
     {
         return $this->hasMany(Inscricao::class, 'eventos_id');
     }
+
+    /**
+     * @return BelongsTo
+     */
+    public function usuario()
+    {
+        return $this->belongsTo(Usuario::class, 'usuarios_id');
+    }
+
 }

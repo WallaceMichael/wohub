@@ -7,11 +7,12 @@ import CoursesPage from '@/views/CoursesPage.vue';
 import ArticlesPage from '@/views/ArticlesPage.vue';
 import EventsPage from '@/views/EventsPage.vue';
 import MyEventsPage from '@/views/MyEventsPage.vue';
-
+import ResumoPage from "@/views/ResumoPage.vue";
+import ContatoPage from "@/views/ContatoPage.vue";
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
-    redirect: '/home', // Redirect to /home by default
+    redirect: '/home',
   },
   {
     path: '/home',
@@ -25,13 +26,9 @@ const routes: Array<RouteRecordRaw> = [
   },
   {
     path: '/main',
+    name: 'Main',
     component: MainPage,
     children: [
-      {
-        path: '/main',
-        name: 'Main',
-        component: MainPage, // HomePage under /main
-      },
       {
         path: '/courses',
         name: 'Cursos',
@@ -53,6 +50,16 @@ const routes: Array<RouteRecordRaw> = [
         component: MyEventsPage,
       },
     ],
+  },
+  {
+    path: '/resumo',
+    name: 'Resumo',
+    component: ResumoPage,
+  },
+  {
+    path: '/contato',
+    name: 'Contato',
+    component: ContatoPage,
   },
 ];
 

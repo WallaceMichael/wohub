@@ -48,6 +48,7 @@ export default defineComponent({
   <ion-card>
     <img alt="Silhouette of mountains" :src="event.foto" style="height: 220px;object-fit:cover;" />
     <ion-card-header>
+      <ion-card-subtitle class="text-category">{{event.data_evento}}</ion-card-subtitle>
       <ion-card-subtitle class="text-category">{{event.categoria}}</ion-card-subtitle>
       <ion-card-title class="text-title">{{event.titulo}}</ion-card-title>
       <ion-card-subtitle class="text-description">{{event.descricao}}</ion-card-subtitle>
@@ -57,17 +58,17 @@ export default defineComponent({
       <div slot="end" class="d-flex">
         <ion-item lines="none">
           <ion-avatar slot="start">
-            <img src="https://ionicframework.com/docs/img/demos/avatar.svg"/>
+            <img :src="event.usuario.foto"/>
           </ion-avatar>
           <div>
-            <ion-label>Maria Joaquina</ion-label>
-            <ion-label color="primary">Front-end</ion-label>
+            <ion-label>{{ event.usuario.nome }}</ion-label>
+            <ion-label color="primary">{{ event.usuario.cargo }}</ion-label>
           </div>
         </ion-item>
       </div>
       <div class="d-flex">
         <ion-col size="12" class="ion-padding-horizontal ion-padding-top">
-          <ion-button fill="solid" expand="block" class="text-white">Acessar</ion-button>
+          <ion-button :href="event.link" target="_blank" fill="solid" expand="block" class="text-white">Acessar</ion-button>
         </ion-col>
       </div>
     </ion-card-content>

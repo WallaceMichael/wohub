@@ -10,8 +10,9 @@ class Artigo extends Model
     use HasFactory;
 
     protected $table = 'artigos';
+    public $timestamps = true;
 
-    protected $fillable = ['titulo', 'descricao', 'categoria', 'foto', 'usuarios_id'];
+    protected $fillable = ['titulo', 'descricao_curta', 'descricao', 'categoria', 'link', 'foto'];
 
     // Relacionamento: Um artigo pertence a um usuário
     public function usuario()

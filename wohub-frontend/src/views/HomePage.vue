@@ -1,19 +1,33 @@
 <template>
   <ion-page>
     <ion-header class="ion-no-border">
-      <ion-toolbar class="ion-padding">
+      <ion-toolbar class="ion-padding ion-hide-md-down">
         <ion-buttons slot="start">
-          <ion-button>
-            <ion-img  router-link="/main" router-direction="forward" src="./wohub_logo_complete.png" style="width: 118px;height: 31px;"></ion-img>
-          </ion-button>
+            <ion-img src="./wohub_logo_complete.png" style="width: 118px;height: 31px;"></ion-img>
         </ion-buttons>
         <ion-title>
           <div class="d-flex ion-justify-content-center">
-            <ion-button class="nav-menu-options" href="/home" fill="clear">Home</ion-button>
+            <ion-button class="nav-menu-options" color="primary" href="/home" fill="clear">Home</ion-button>
             <ion-button class="nav-menu-options" href="/resumo" fill="clear">Resumo</ion-button>
             <ion-button class="nav-menu-options" href="/contato" fill="clear">Contato</ion-button>
           </div>
 
+        </ion-title>
+        <ion-buttons slot="end">
+          <ion-button router-link="/login" router-direction="forward" class="btn-border" color="primary" fill="outline" >
+            <ion-text class="ion-padding">
+              Login
+            </ion-text></ion-button>
+          <ion-button class="btn-border" color="primary" fill="solid">
+            <ion-text color="light" class="ion-padding">Inscreva-se</ion-text>
+          </ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+      <ion-toolbar class="ion-padding ion-show-md-down ion-hide-md-up">
+        <ion-buttons slot="start">
+          <ion-img src="./wohub_logo_complete.png" style="width: 118px;height: 31px;"></ion-img>
+        </ion-buttons>
+        <ion-title>
         </ion-title>
         <ion-buttons slot="end">
           <ion-button router-link="/login" router-direction="forward" class="btn-border" color="primary" fill="outline" >

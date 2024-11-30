@@ -1,20 +1,18 @@
 import axios from 'axios';
 
 const api = axios.create({
-    baseURL: 'http://localhost:8000/api', // Updated to point to localhost:8000
-    timeout: 5000, // Optional: Set a timeout for requests
+    baseURL: 'http://127.0.0.1:8000/api',
+    timeout: 5000,
 });
 
 api.defaults.withCredentials = true;
 api.defaults.withXSRFToken = true;
 
-// Example: Add a request interceptor (optional)
 api.interceptors.request.use(
     (config) => {
-        // Modify request config if needed (e.g., add headers)
-        const token = localStorage.getItem('authToken');
+        const token = localStorage.getItem('access_token');
         if (token) {
-            config.headers.Authorization = `Bearer ${token}`;
+            config.headers.Authorization = `${token}`;
         }
         return config;
     },
@@ -25,8 +23,11 @@ api.interceptors.request.use(
 api.interceptors.response.use(
     (response) => response,
     (error) => {
-        // Handle errors globally
         console.error('API Error:', error);
+        if(error.response.data.message === "JWT not sent" || error.response.data.message.includes("JWT not sent")){
+            alert("Você não está autorizado a acessar essa página!");
+            window.location.href = '/login';
+        }
         return Promise.reject(error);
     }
 );
