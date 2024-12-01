@@ -30,6 +30,7 @@ export default defineComponent({
         console.log(events);
         this.eventsList = events;
       }).catch(error => {
+        this.eventsList = [];
         console.error("Error fetching events:", error);
       })
     }
