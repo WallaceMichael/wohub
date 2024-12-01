@@ -18,7 +18,7 @@ export default defineComponent({
     IonPage
   },
   data() {
-    const eventsList = [];
+    const eventsList = null;
     return {
       eventsList
     }
@@ -46,9 +46,14 @@ export default defineComponent({
       <InfoHeader title="Eventos" subtitle="Eventos legais para você" image="/woman_wearing_glasses.png" />
       <ion-row>
         <div class="ion-padding ion-margin">
-          <ion-row>
+          <ion-row v-if="eventsList && eventsList.length > 0">
             <ion-col size="12" size-sm="6" size-md="6" size-lg="3" v-for="event in eventsList" :key="event.id">
               <EventCard :event="event"/>
+            </ion-col>
+          </ion-row>
+          <ion-row v-else-if="eventsList && eventList.length == 0">
+            <ion-col size="12">
+              <ion-text color="medium">Você não está inscrito(a) em nenhum evento!</ion-text>
             </ion-col>
           </ion-row>
         </div>

@@ -15,6 +15,8 @@ import {
   IonAvatar, IonItem, IonImg,IonIcon
 } from "@ionic/vue";
 import {Event} from "@/models/Event";
+import api from "@/services/axios";
+import {User} from "@/models/User";
 
 export default defineComponent({
   name: "EventCard",
@@ -41,6 +43,40 @@ export default defineComponent({
       required: true,
     },
   },
+  data(){
+    return {
+      subscribeButtonDisabled: false,
+    }
+  },
+
+  computed:{
+    displaySubscribeButton(){
+      if(this.$route.name.includes("MeusEventos")){
+        return false;
+      }
+      return true;
+    }
+  },
+  methods:{
+    subscribe(){
+      const user = User.getUser();
+      const payload = {
+        "user_id" : user.id,
+      }
+
+      api.post(`/eventos/subscribe/${this.$props.event.id}`, payload).then(res => {
+        console.log(res);
+        alert("Inscrição realizada com sucesso!");
+        window.location.reload();
+        this.subscribeButtonDisabled = false;
+      }).catch(error => {
+        console.error("Error on subscribe to an event: ", error);
+        const message = error?.response?.data?.message ?? "";
+        alert(`Erro ao se inscrever no evento: ${this.$props.event.titulo}. \n${message} \nPor favor, tente novamente!`);
+        this.subscribeButtonDisabled = false;
+      })
+    }
+  }
 })
 </script>
 
@@ -67,8 +103,11 @@ export default defineComponent({
           </div>
         </ion-item>
       </div>
-      <div class="d-flex">
-        <ion-col size="12" class="ion-padding-horizontal ion-padding-top">
+      <div class="d-flex flex-column">
+        <ion-col v-if="displaySubscribeButton" size="12" class="ion-padding-horizontal ion-padding-top">
+          <ion-button :disabled="subscribeButtonDisabled" @click="subscribe" fill="outline" expand="block" >Se inscrever</ion-button>
+        </ion-col>
+        <ion-col size="12" class="ion-padding-horizontal">
           <ion-button :href="event.link" target="_blank" fill="solid" expand="block" class="text-white">Acessar</ion-button>
         </ion-col>
       </div>

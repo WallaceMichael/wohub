@@ -134,7 +134,6 @@ class EventoController extends Controller
         $inscricao = Inscricao::create([
             'usuarios_id' => $userId,
             'eventos_id' => $event_id,
-            'data_inscricao' => now(),
         ]);
 
         return response()->json([

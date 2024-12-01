@@ -8,11 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Inscricao extends Model
 {
     use HasFactory;
-    public $timestamps = false;
+    public $timestamps = true;
 
     protected $table = 'inscricoes';
 
-    protected $fillable = ['usuarios_id', 'eventos_id', 'data_inscricao'];
+    protected $fillable = ['usuarios_id', 'eventos_id'];
 
     // Relacionamento: Uma inscrição pertence a um usuário
     public function usuario()
