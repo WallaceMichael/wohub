@@ -38,11 +38,11 @@ class InsertSampleData extends Migration
 
         // Insert Courses
         DB::table('cursos')->insert([
-            ['id' => 1, 'titulo' => 'Introdução ao Python', 'descricao_curta' => 'Aprenda os fundamentos da programação em Python, ideal para iniciantes.', 'descricao' => 'Programação', 'link' => 'https://exemplo.com/curso-python', 'foto' => 'curso1.png', 'usuarios_id' => 2],
-            ['id' => 2, 'titulo' => 'Bootcamp de Desenvolvimento Web', 'descricao_curta' => 'Curso completo de HTML, CSS e JavaScript para criação de sites.', 'descricao' => 'Desenvolvimento Web', 'link' => 'https://exemplo.com/bootcamp-web', 'foto' => 'curso2.png', 'usuarios_id' => 2],
-            ['id' => 3, 'titulo' => 'Dominando React.js', 'descricao_curta' => 'Aprofunde-se na construção de aplicações escaláveis com React.js.', 'descricao' => 'Desenvolvimento Frontend', 'link' => 'https://exemplo.com/react-avancado', 'foto' => 'curso3.png', 'usuarios_id' => 2],
-            ['id' => 4, 'titulo' => 'Desenvolvimento Full-Stack', 'descricao_curta' => 'Aprenda a criar aplicações completas com Node.js e MongoDB.', 'descricao' => 'Full Stack', 'link' => 'https://exemplo.com/curso-fullstack', 'foto' => 'curso4.png', 'usuarios_id' => 2],
-            ['id' => 5, 'titulo' => 'Introdução ao Machine Learning', 'descricao_curta' => 'Entenda os conceitos básicos de aprendizado de máquina e suas aplicações.', 'descricao' => 'Ciência de Dados', 'link' => 'https://exemplo.com/ml-introducao', 'foto' => 'curso2.png', 'usuarios_id' => 2],
+            ['id' => 1, 'titulo' => 'Introdução ao Python', 'descricao' => 'Aprenda os fundamentos da programação em Python, ideal para iniciantes.', 'categoria' => 'Programação', 'link' => 'https://exemplo.com/curso-python', 'foto' => 'curso1.png', 'usuarios_id' => 2],
+            ['id' => 2, 'titulo' => 'Bootcamp de Desenvolvimento Web', 'descricao' => 'Curso completo de HTML, CSS e JavaScript para criação de sites.', 'categoria' => 'Desenvolvimento Web', 'link' => 'https://exemplo.com/bootcamp-web', 'foto' => 'curso2.png', 'usuarios_id' => 2],
+            ['id' => 3, 'titulo' => 'Dominando React.js', 'descricao' => 'Aprofunde-se na construção de aplicações escaláveis com React.js.', 'categoria' => 'Desenvolvimento Frontend', 'link' => 'https://exemplo.com/react-avancado', 'foto' => 'curso3.png', 'usuarios_id' => 2],
+            ['id' => 4, 'titulo' => 'Desenvolvimento Full-Stack', 'descricao' => 'Aprenda a criar aplicações completas com Node.js e MongoDB.', 'categoria' => 'Full Stack', 'link' => 'https://exemplo.com/curso-fullstack', 'foto' => 'curso4.png', 'usuarios_id' => 2],
+            ['id' => 5, 'titulo' => 'Introdução ao Machine Learning', 'descricao' => 'Entenda os conceitos básicos de aprendizado de máquina e suas aplicações.', 'categoria' => 'Ciência de Dados', 'link' => 'https://exemplo.com/ml-introducao', 'foto' => 'curso2.png', 'usuarios_id' => 2],
         ]);
 
         // Insert Events
@@ -110,6 +110,7 @@ class InsertSampleData extends Migration
             [
                 'id' => 1,
                 'titulo' => 'Artigo de IA',
+                'descricao_curta' => 'Vamos perguntar ao GPT?',
                 'descricao' => '<article> <h1>Os Robôs irão dominar tudo?</h1> <img src="https://www.google.com.br/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png" alt="Logo do Google"> <p style="color: red;">Não, não irão!</p> <p><a href="#">Saiba mais</a></p> <h5>Até a próxima pessoal!</h5></article>',
                 'categoria' => 'I.A',
                 'link' => 'https://google.com.br',
@@ -121,6 +122,7 @@ class InsertSampleData extends Migration
             [
                 'id' => 2,
                 'titulo' => 'O Futuro das Redes Sociais',
+                'descricao_curta' => 'Muitos andam falando por aí...',
                 'descricao' => '<article> <h1>O Futuro das Redes Sociais</h1> <img src="https://static.xx.fbcdn.net/rsrc.php/y1/r/4lCu2zih0ca.svg" alt="Logo do Facebook"> <p style="color: blue;">As redes sociais continuam a evoluir!</p> <p><a href="https://www.facebook.com/">Saiba mais</a></p> <h5>Nos vemos nas redes sociais!</h5></article>',
                 'categoria' => 'Tecnologia',
                 'link' => 'https://www.facebook.com/',
@@ -132,6 +134,7 @@ class InsertSampleData extends Migration
             [
                 'id' => 3,
                 'titulo' => 'Inovação no Porto Digital',
+                'descricao_curta' => 'Sempre inovando!',
                 'descricao' => '<article> <h1>Inovação no Porto Digital</h1> <img src="https://upload.wikimedia.org/wikipedia/commons/b/bc/Marca_Porto_Digital_2019_completa.png" alt="Logo do Porto Digital"> <p style="color: green;">O Porto Digital é um polo de inovação no Brasil.</p> <p><a href="https://www.portodigital.org/">Saiba mais</a></p> <h5>Inovando para o futuro!</h5></article>',
                 'categoria' => 'Inovação',
                 'link' => 'https://www.portodigital.org/',

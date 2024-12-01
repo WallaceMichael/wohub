@@ -112,9 +112,12 @@ import {
   IonMenuButton
 } from '@ionic/vue';
 import {defineComponent} from 'vue';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import {useRoute} from 'vue-router';
 import {User} from "@/models/User";
 import api from "@/services/axios";
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { peopleOutline, homeOutline, logOutOutline, albumsOutline, pricetagsOutline, newspaperOutline, arrowBack, arrowBackOutline, arrowBackCircle, arrowBackCircleOutline } from 'ionicons/icons';
 
 export default defineComponent({
   components: {
@@ -153,8 +156,9 @@ export default defineComponent({
       this.$router.push('/login');
       return;
     }
-
-    this.user = user;
+    this.user = new User(user);
+  },
+  computed: {
   },
   methods: {
     logout() {

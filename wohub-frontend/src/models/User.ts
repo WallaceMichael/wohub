@@ -23,4 +23,13 @@ export class User {
     getDisplayName(): string {
         return `${this.nome} (${this.tipo_usuario})`;
     }
+
+    isCreatorType(): boolean {
+        return this.tipo_usuario === "2" ? true : false;
+    }
+
+    static getUser() {
+        const user = JSON.parse(localStorage.getItem("user") ?? "null");
+        return user ? new User(user) : null;
+    }
 }

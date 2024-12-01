@@ -13,7 +13,7 @@ class Evento extends Model
     public $timestamps = true;
 
     protected $table = 'eventos';
-    protected $fillable = ['foto', 'titulo', 'descricao', 'categoria', 'link', 'tipo_evento', 'usuarios_id'];
+    protected $fillable = ['foto', 'titulo', 'descricao', 'categoria', 'link', 'tipo_evento', 'data_evento', 'usuarios_id'];
 
     public function inscricoes()
     {
@@ -26,6 +26,16 @@ class Evento extends Model
     public function usuario()
     {
         return $this->belongsTo(Usuario::class, 'usuarios_id');
+    }
+
+    public function getTipoEventoAttribute($value)
+    {
+        return ucfirst($value);
+    }
+
+    public function getFotoAttribute($value)
+    {
+        return !empty($value) ? $value : "curso2.png";
     }
 
 }

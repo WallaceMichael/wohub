@@ -23,22 +23,32 @@ class CursoController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'titulo' => 'required|string|max:50',
-            'descricao' => 'required|string|max:255',
-            'categoria' => 'required|string|max:50',
-            'link' => 'required|url',
-            'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'titulo' => 'required|string',
+            'descricao' => 'required|string',
+            'categoria' => 'required|string',
+            'link' => 'required|string',
+//            'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'foto' => 'nullable|string',
+            'usuarios_id' => 'required|integer|exists:usuarios,id',
         ]);
 
-// Handle file upload if present
-        if ($request->hasFile('foto')) {
-            $path = $request->file('foto')->store('cursos', 'public');
-            $validatedData['foto'] = $path;
+        $validatedData["usuarios_id"] = $request->user()->id;
+
+        // Handle file upload if present
+//        if ($request->hasFile('foto')) {
+//            $path = $request->file('foto')->store('cursos', 'public');
+//            $validatedData['foto'] = $path;
+//        }
+
+        try {
+            $curso = Curso::create($validatedData);
+            return response()->json($curso, 201);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Error creating curso: ' . $e->getMessage(),
+            ], 500);
         }
-
-        Curso::create($validatedData);
-
-        return redirect()->route('cursos.index')->with('success', 'Curso criado com sucesso!');
     }
 
 // Display the specified resource.

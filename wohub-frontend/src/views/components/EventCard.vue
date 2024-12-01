@@ -46,9 +46,10 @@ export default defineComponent({
 
 <template>
   <ion-card>
-    <img alt="Silhouette of mountains" :src="event.foto" style="height: 220px;object-fit:cover;" />
+    <img :src="event.foto" style="height: 220px;object-fit:cover;" />
     <ion-card-header>
       <ion-card-subtitle class="text-category">{{event.data_evento}}</ion-card-subtitle>
+      <ion-card-subtitle class="text-category">{{event.tipo_evento}}</ion-card-subtitle>
       <ion-card-subtitle class="text-category">{{event.categoria}}</ion-card-subtitle>
       <ion-card-title class="text-title">{{event.titulo}}</ion-card-title>
       <ion-card-subtitle class="text-description">{{event.descricao}}</ion-card-subtitle>

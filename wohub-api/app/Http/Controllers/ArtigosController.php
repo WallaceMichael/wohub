@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Artigo;
+use Illuminate\Validation\Rule;
 
 class ArtigosController extends Controller
 {
@@ -28,25 +29,32 @@ class ArtigosController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'id' => 'null|number',
-            'titulo' => 'required|string|max:255',
+            'titulo' => 'required|string',
+            'descricao_curta' => 'required|string|max:255',
             'descricao' => 'required|string',
-            'descricao_curta' => 'required|string',
+            'categoria' => 'required|string',
             'link' => 'required|string',
-            'categoria' => 'required|string|max:255',
-            'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'usuarios_id' => 'required|exists:usuarios,id',
+            'foto' => 'nullable|string',
+            'usuarios_id' => 'required|integer|exists:usuarios,id',
         ]);
 
+        $validatedData["usuarios_id"] = $request->user()->id;
+
         // Handle file upload if present
-        if ($request->hasFile('foto')) {
-            $path = $request->file('foto')->store('artigos', 'public');
-            $validatedData['foto'] = $path;
+//        if ($request->hasFile('foto')) {
+//            $path = $request->file('foto')->store('artigos', 'public');
+//            $validatedData['foto'] = $path;
+//        }
+
+        try {
+            $article = Artigo::create($validatedData);
+            return response()->json($article, 201);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Error creating event: ' . $e->getMessage(),
+            ], 500);
         }
-
-        Artigo::create($validatedData);
-
-        return redirect()->route('artigos.index')->with('success', 'Artigo criado com sucesso!');
     }
 
     // Display the specified resource.

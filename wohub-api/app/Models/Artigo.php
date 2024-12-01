@@ -12,7 +12,7 @@ class Artigo extends Model
     protected $table = 'artigos';
     public $timestamps = true;
 
-    protected $fillable = ['titulo', 'descricao_curta', 'descricao', 'categoria', 'link', 'foto'];
+    protected $fillable = ['titulo', 'descricao_curta', 'descricao', 'categoria', 'link', 'foto', 'usuarios_id'];
 
     // Relacionamento: Um artigo pertence a um usuário
     public function usuario()
@@ -24,5 +24,10 @@ class Artigo extends Model
     public function comentarios()
     {
         return $this->hasMany(Comentario::class, 'artigos_id');
+    }
+
+    public function getFotoAttribute($value)
+    {
+        return !empty($value) ? $value : "curso2.png";
     }
 }

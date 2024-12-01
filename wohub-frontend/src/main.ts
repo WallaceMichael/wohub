@@ -1,8 +1,8 @@
-import { createApp } from 'vue'
+import {createApp} from 'vue'
 import App from './App.vue'
 import router from './router';
 
-import { IonicVue } from '@ionic/vue';
+import {IonicVue} from '@ionic/vue';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/vue/css/core.css';
@@ -24,11 +24,39 @@ import '@ionic/vue/css/palettes/dark.system.css';
 
 /* Theme variables */
 import './theme/variables.css';
+import {
+    peopleOutline,
+    homeOutline,
+    logOutOutline,
+    albumsOutline,
+    pricetagsOutline,
+    newspaperOutline,
+    arrowBack,
+    arrowBackOutline,
+    arrowBackCircle,
+    arrowBackCircleOutline,
+    closeCircleOutline
+} from 'ionicons/icons';
+import {addIcons} from 'ionicons';
 
 const app = createApp(App)
-  .use(IonicVue)
-  .use(router);
+    .use(IonicVue)
+    .use(router);
+
+addIcons({
+    peopleOutline,
+    homeOutline,
+    logOutOutline,
+    albumsOutline,
+    pricetagsOutline,
+    newspaperOutline,
+    arrowBack,
+    arrowBackOutline,
+    arrowBackCircle,
+    arrowBackCircleOutline,
+    closeCircleOutline
+});
 
 router.isReady().then(() => {
-  app.mount('#app');
+    app.mount('#app');
 });

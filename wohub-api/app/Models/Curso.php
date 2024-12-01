@@ -13,7 +13,7 @@ class Curso extends Model
     protected $table = 'cursos';
     public $timestamps = true;
 
-    protected $fillable = ['titulo', 'descricao', 'categoria', 'link', 'foto'];
+    protected $fillable = ['titulo', 'descricao', 'categoria', 'link', 'foto', 'usuarios_id'];
 
     /**
      * @return BelongsTo
@@ -21,5 +21,10 @@ class Curso extends Model
     public function usuario()
     {
         return $this->belongsTo(Usuario::class, 'usuarios_id');
+    }
+
+    public function getFotoAttribute($value)
+    {
+        return !empty($value) ? $value : "curso1.png";
     }
 }

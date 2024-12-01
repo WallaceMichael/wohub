@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Evento;
 use App\Models\Inscricao;
+use Illuminate\Validation\Rule;
 
 class EventoController extends Controller
 {
@@ -24,23 +25,34 @@ class EventoController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'titulo' => 'required|string|max:50',
-            'descricao' => 'required|string|max:255',
-            'categoria' => 'required|string|max:50',
-            'link' => 'required|url',
-            'tipo_evento' => 'required|string|max:50',
-            'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'titulo' => 'required|string',
+            'descricao' => 'required|string',
+            'categoria' => 'required|string',
+            'link' => 'required|string',
+            'tipo_evento' => ['required', 'string', Rule::in(['palestra', 'workshop', 'hackathon'])],
+            // 'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'foto' => 'nullable|string',
+            'data_evento' => 'nullable|date',
+            'usuarios_id' => 'required|integer|exists:usuarios,id',
         ]);
 
+        $validatedData["usuarios_id"] = $request->user()->id;
+
         // Handle file upload if present
-        if ($request->hasFile('foto')) {
-            $path = $request->file('foto')->store('eventos', 'public');
-            $validatedData['foto'] = $path;
+//        if ($request->hasFile('foto')) {
+//            $path = $request->file('foto')->store('eventos', 'public');
+//            $validatedData['foto'] = $path;
+//        }
+
+        try {
+            $event = Evento::create($validatedData);
+            return response()->json($event, 201);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Error creating event: ' . $e->getMessage(),
+            ], 500);
         }
-
-        Evento::create($validatedData);
-
-        return redirect()->route('eventos.index')->with('success', 'Evento criado com sucesso!');
     }
 
     // Display the specified resource.
