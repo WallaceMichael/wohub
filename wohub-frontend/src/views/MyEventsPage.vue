@@ -51,7 +51,7 @@ export default defineComponent({
               <EventCard :event="event"/>
             </ion-col>
           </ion-row>
-          <ion-row v-else-if="eventsList && eventList.length == 0">
+          <ion-row v-else-if="eventsList && eventsList.length == 0">
             <ion-col size="12">
               <ion-text color="medium">Você não está inscrito(a) em nenhum evento!</ion-text>
             </ion-col>
