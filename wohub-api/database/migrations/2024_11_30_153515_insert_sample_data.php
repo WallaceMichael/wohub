@@ -20,7 +20,7 @@ class InsertSampleData extends Migration
                 'email' => 'everton7ej@gmail.com',
                 'password' => '$2y$12$Np6v/LdgjM8MhowqRQ21q.cicHAbqKspWWsmY62UQ2DSASy0830kq',
                 'created_at' => '2024-10-30 12:19:43',
-                'tipo_usuario' => 1,
+                'tipo_usuario' => 2,
                 'foto' => 'veve.jpg',
                 'cargo' => 'Fullstack',
             ],
@@ -40,8 +40,8 @@ class InsertSampleData extends Migration
         DB::table('cursos')->insert([
             ['id' => 1, 'titulo' => 'Introdução ao Python', 'descricao' => 'Aprenda os fundamentos da programação em Python, ideal para iniciantes.', 'categoria' => 'Programação', 'link' => 'https://exemplo.com/curso-python', 'foto' => 'curso1.png', 'usuarios_id' => 2],
             ['id' => 2, 'titulo' => 'Bootcamp de Desenvolvimento Web', 'descricao' => 'Curso completo de HTML, CSS e JavaScript para criação de sites.', 'categoria' => 'Desenvolvimento Web', 'link' => 'https://exemplo.com/bootcamp-web', 'foto' => 'curso2.png', 'usuarios_id' => 2],
-            ['id' => 3, 'titulo' => 'Dominando React.js', 'descricao' => 'Aprofunde-se na construção de aplicações escaláveis com React.js.', 'categoria' => 'Desenvolvimento Frontend', 'link' => 'https://exemplo.com/react-avancado', 'foto' => 'curso3.png', 'usuarios_id' => 2],
-            ['id' => 4, 'titulo' => 'Desenvolvimento Full-Stack', 'descricao' => 'Aprenda a criar aplicações completas com Node.js e MongoDB.', 'categoria' => 'Full Stack', 'link' => 'https://exemplo.com/curso-fullstack', 'foto' => 'curso4.png', 'usuarios_id' => 2],
+            ['id' => 3, 'titulo' => 'Dominando Vue.js', 'descricao' => 'Aprofunde-se na construção de aplicações escaláveis com React.js.', 'categoria' => 'Desenvolvimento Frontend', 'link' => 'https://exemplo.com/react-avancado', 'foto' => 'curso3.png', 'usuarios_id' => 1],
+            ['id' => 4, 'titulo' => 'Desenvolvimento Full-Stack', 'descricao' => 'Aprenda a criar aplicações completas com Node.js e MongoDB.', 'categoria' => 'Full Stack', 'link' => 'https://exemplo.com/curso-fullstack', 'foto' => 'curso4.png', 'usuarios_id' => 1],
             ['id' => 5, 'titulo' => 'Introdução ao Machine Learning', 'descricao' => 'Entenda os conceitos básicos de aprendizado de máquina e suas aplicações.', 'categoria' => 'Ciência de Dados', 'link' => 'https://exemplo.com/ml-introducao', 'foto' => 'curso2.png', 'usuarios_id' => 2],
         ]);
 
@@ -53,7 +53,7 @@ class InsertSampleData extends Migration
                 'titulo' => 'Inteligência Artificial na Prática',
                 'descricao' => 'Explorando como IA pode transformar negócios.',
                 'categoria' => 'IA',
-                'link' => 'https://exemplo.com/ia-na-pratica',
+                'link' => 'http://exemplo.com/ia-na-pratica',
                 'tipo_evento' => 'palestra',
                 'usuarios_id' => 2,
                 'data_evento' => '2024-12-01 10:00:00'  // Added date and time for the event
@@ -64,9 +64,9 @@ class InsertSampleData extends Migration
                 'titulo' => 'Desenvolvimento Web Moderno',
                 'descricao' => 'Workshop prático sobre as ferramentas e frameworks mais recentes.',
                 'categoria' => 'Web Dev',
-                'link' => 'https://exemplo.com/web-moderno',
+                'link' => 'http://exemplo.com/web-moderno',
                 'tipo_evento' => 'workshop',
-                'usuarios_id' => 2,
+                'usuarios_id' => 1,
                 'data_evento' => '2024-12-05 14:00:00'  // Added date and time for the event
             ],
             [
@@ -75,7 +75,7 @@ class InsertSampleData extends Migration
                 'titulo' => 'Hackathon de Soluções Sustentáveis',
                 'descricao' => 'Maratona de inovação focada em criar tecnologias sustentáveis.',
                 'categoria' => 'Sustentabilidade',
-                'link' => 'https://exemplo.com/hackathon-sustentavel',
+                'link' => 'http://exemplo.com/hackathon-sustentavel',
                 'tipo_evento' => 'hackathon',
                 'usuarios_id' => 2,
                 'data_evento' => '2024-12-10 08:00:00'  // Added date and time for the event
@@ -86,9 +86,9 @@ class InsertSampleData extends Migration
                 'titulo' => 'Segurança Cibernética em 2024',
                 'descricao' => 'Entenda as novas ameaças e como se proteger.',
                 'categoria' => 'Cybersec',
-                'link' => 'https://exemplo.com/ciberseguranca-2024',
+                'link' => 'http://exemplo.com/ciberseguranca-2024',
                 'tipo_evento' => 'palestra',
-                'usuarios_id' => 2,
+                'usuarios_id' => 1,
                 'data_evento' => '2024-12-15 09:00:00'  // Added date and time for the event
             ],
             [
@@ -97,7 +97,7 @@ class InsertSampleData extends Migration
                 'titulo' => 'Introdução ao Machine Learning',
                 'descricao' => 'Workshop sobre conceitos básicos e aplicações práticas.',
                 'categoria' => 'IA',
-                'link' => 'https://exemplo.com/ml-basico',
+                'link' => 'http://exemplo.com/ml-basico',
                 'tipo_evento' => 'workshop',
                 'usuarios_id' => 2,
                 'data_evento' => '2024-12-20 11:00:00'  // Added date and time for the event
@@ -139,7 +139,7 @@ class InsertSampleData extends Migration
                 'categoria' => 'Inovação',
                 'link' => 'https://www.portodigital.org/',
                 'foto' => 'https://upload.wikimedia.org/wikipedia/commons/b/bc/Marca_Porto_Digital_2019_completa.png',
-                'usuarios_id' => 2,
+                'usuarios_id' => 1,
                 'created_at' => '2024-10-30 12:43:31',
                 'updated_at' => NULL
             ]

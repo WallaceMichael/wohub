@@ -24,8 +24,20 @@
         </ion-col>
 
       </ion-row>
-      <ion-row>
-        <div class="ion-padding ion-margin">
+      <ion-row v-else id="modalCreateRow" class="ion-justify-content-end">
+        <ion-col size="2">
+          <ion-item>
+            <ion-select v-model="filtro" interface="popover" label="Filtrar" label-placement="floating">
+              <ion-select-option value="all">Todos</ion-select-option>
+              <ion-select-option value="hackathon">Hackathon</ion-select-option>
+              <ion-select-option value="palestra">Palestra</ion-select-option>
+              <ion-select-option value="workshop">Workshop</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row style="flex-grow:1!important;">
+        <div class="ion-padding ion-margin" style="flex-grow:1!important;">
           <ion-row>
             <ion-col size="12" size-sm="6" size-md="6" size-lg="3" v-for="event in filteredEvents" :key="event.id">
               <EventCard :event="event"/>
