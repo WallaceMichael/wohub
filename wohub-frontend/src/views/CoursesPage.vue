@@ -1,14 +1,15 @@
 <template>
   <ion-page>
     <ion-grid class="d-flex flex-column" style="height: 100%; overflow: auto; width:100%!important;">
-      <InfoHeader title="Cursos" subtitle="Cursos legais para você" image="/woman_wearing_glasses.png"/>
-      <ion-row v-if="user.isCreatorType()" id="modalCreateRow" class="ion-justify-content-end">
+      <InfoHeader title="Cursos" subtitle="Aprenda novas habilidades e avance na sua carreira com minicursos criados especialmente para mulheres que desejam ingressar na área de TI." image="/woman_wearing_glasses.png"/>
+      <ion-row v-if="user.isCreatorType()" id="modalCreateRow" class="ion-justify-content-start">
         <ion-button class="ion-padding-vertical text-white" fill="solid" @click="setOpen(true)" expand="block">Criar
           Curso
+          <ion-icon name="add-outline" slot="start"></ion-icon>
         </ion-button>
       </ion-row>
-      <ion-row>
-        <div class="ion-padding ion-margin">
+      <ion-row style="flex-grow:1!important;">
+        <div class="ion-padding ion-margin" style="flex-grow:1!important;">
           <ion-row>
             <ion-col size="12" size-sm="6" size-md="6" size-lg="3" v-for="course in courseList" :key="course.id">
               <CourseCard :course="course"/>
@@ -52,13 +53,19 @@
           </ion-item>
           <br>
           <ion-item>
-            <ion-input
+            <ion-select
+                interface="popover"
                 v-model="cursoModel.categoria"
                 label="Categoria"
                 label-placement="floating"
-                type="text"
-                placeholder="Digite a categoria do curso"
-            ></ion-input>
+                placeholder="Selecione a categoria do curso"
+            >
+              <ion-select-option value="Desenvolvimento">Desenvolvimento</ion-select-option>
+              <ion-select-option value="Inteligência Artificial">Inteligência Artificial</ion-select-option>
+              <ion-select-option value="Cybersegurança">Cybersegurança</ion-select-option>
+              <ion-select-option value="Data Science">Data Science</ion-select-option>
+              <ion-select-option value="DevOps">DevOps</ion-select-option>
+            </ion-select>
           </ion-item>
           <br>
           <ion-item>
@@ -99,7 +106,7 @@ import {
   IonGrid, IonImg, IonPage, IonRow, IonText,
   IonModal, IonHeader, IonToolbar,
   IonItem, IonContent, IonTitle, IonInput, IonButtons, IonButton, IonIcon,
-  IonList
+  IonList, IonSelect, IonSelectOption
 } from '@ionic/vue';
 
 import api from '@/services/axios';
@@ -118,7 +125,7 @@ export default defineComponent({
     IonPage,
     IonModal, IonHeader, IonToolbar,
     IonItem, IonContent, IonTitle, IonInput, IonButtons, IonButton, IonIcon,
-    IonList
+    IonList, IonSelect, IonSelectOption
   },
   data() {
     const courseList = [];

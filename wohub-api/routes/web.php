@@ -57,6 +57,6 @@ Route::group(['prefix' => 'api', 'middleware' => ['web', 'auth:sanctum']], funct
         Route::put('/', [EventoController::class, 'update']);
         Route::delete('/', [EventoController::class, 'destroy']);
         Route::post('/subscribe/{event_id}', [EventoController::class, 'subscribe']);
-
+        Route::get('/topEvents/{quantity?}', [EventoController::class, 'topEvents']);
     });
 });

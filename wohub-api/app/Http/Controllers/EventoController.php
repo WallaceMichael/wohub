@@ -6,13 +6,14 @@ use Illuminate\Http\Request;
 use App\Models\Evento;
 use App\Models\Inscricao;
 use Illuminate\Validation\Rule;
+use Illuminate\Http\JsonResponse;
 
 class EventoController extends Controller
 {
     // Display a listing of the resource.
     public function index()
     {
-        $eventos = Evento::with("usuario")->get();
+        $eventos = Evento::with("usuario")->orderBy('id', 'desc')->get();
 
         if ($eventos->isEmpty()) {
             return response()->json([], 404);
@@ -141,4 +142,19 @@ class EventoController extends Controller
             'inscricao' => $inscricao,
         ], 201);
     }
+
+    public function topEvents(int $quantity = 10): JsonResponse
+    {
+        // Ensure quantity is at least 1
+        $quantity = max(1, $quantity);
+
+        // Retrieve the top events with the most subscriptions
+        $topEvents = Evento::with("usuario")->withCount('inscricoes')
+            ->orderBy('inscricoes_count', 'desc')
+            ->limit($quantity)
+            ->get();
+
+        return response()->json($topEvents);
+    }
+
 }

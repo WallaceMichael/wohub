@@ -10,25 +10,40 @@
       </ion-header>
       <ion-content class="ion-padding">
         <ion-list lines="none">
-          <ion-item router-link="/main">
+          <ion-item
+              :class="{ 'active-link': currentRoute === '/main' }"
+              router-link="/main"
+          >
             <ion-icon icon="home-outline" slot="start"></ion-icon>
             <ion-label>Home</ion-label>
           </ion-item>
           <ion-item-divider></ion-item-divider>
-          <ion-item router-link="/courses">
+          <ion-item
+              :class="{ 'active-link': currentRoute === '/courses' }"
+              router-link="/courses"
+          >
             <ion-icon icon="albums-outline" slot="start"></ion-icon>
             <ion-label>Cursos</ion-label>
           </ion-item>
-          <ion-item router-link="/events">
+          <ion-item
+              :class="{ 'active-link': currentRoute === '/events' }"
+              router-link="/events"
+          >
             <ion-icon icon="pricetags-outline" slot="start"></ion-icon>
             <ion-label>Eventos</ion-label>
           </ion-item>
-          <ion-item router-link="/articles">
+          <ion-item
+              :class="{ 'active-link': currentRoute === '/articles' }"
+              router-link="/articles"
+          >
             <ion-icon icon="newspaper-outline" slot="start"></ion-icon>
             <ion-label>Artigos</ion-label>
           </ion-item>
           <ion-item-divider></ion-item-divider>
-          <ion-item router-link="/my-events">
+          <ion-item
+              :class="{ 'active-link': currentRoute === '/my-events' }"
+              router-link="/my-events"
+          >
             <ion-icon icon="people-outline" slot="start"></ion-icon>
             <ion-label>Meus eventos</ion-label>
           </ion-item>
@@ -72,10 +87,19 @@
       <ion-content v-if="$route.name != 'Main'">
         <ion-router-outlet/>
       </ion-content>
-      <ion-content v-else color="primary" class="d-flex ion-margin-auto">
-        <ion-row style="height: 100%;" class="ion-justify-self-center">
-          <h1 class="d-flex" style="justify-content: center;align-self: center;">O que deseja fazer hoje?</h1>
-        </ion-row>
+      <ion-content v-else class="d-flex ion-margin-auto">
+        <ion-grid class="d-flex flex-column" style="height: 100%; overflow: auto; width:100%!important;">
+          <InfoHeader title="Sejam bem-vindas" subtitle="Descubra um mundo de oportunidades para mulheres na tecnologia. Aqui você encontra capacitação, inspiração e conexão para transformar sua carreira." image="/woman_wearing_glasses.png"/>
+          <ion-row>
+            <div class="ion-padding ion-margin">
+              <ion-row>
+                <ion-col size="12" size-sm="6" size-md="6" size-lg="3" v-for="event in eventsList" :key="event.id">
+                  <EventCard :event="event"/>
+                </ion-col>
+              </ion-row>
+            </div>
+          </ion-row>
+        </ion-grid>
       </ion-content>
     </ion-page>
     <ion-page v-else>
@@ -111,16 +135,21 @@ import {
   IonMenuToggle,
   IonMenuButton
 } from '@ionic/vue';
-import {defineComponent} from 'vue';
+import {defineComponent, ref, watch } from 'vue';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import {useRoute} from 'vue-router';
 import {User} from "@/models/User";
 import api from "@/services/axios";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { peopleOutline, homeOutline, logOutOutline, albumsOutline, pricetagsOutline, newspaperOutline, arrowBack, arrowBackOutline, arrowBackCircle, arrowBackCircleOutline } from 'ionicons/icons';
+import InfoHeader from "@/views/components/InfoHeader.vue";
+import EventCard from "@/views/components/EventCard.vue";
+import {Event} from "@/models/Event";
+
 
 export default defineComponent({
   components: {
+    EventCard, InfoHeader,
     IonButton,
     IonIcon,
     IonImg,
@@ -146,9 +175,19 @@ export default defineComponent({
   },
   data() {
     let user: User;
+    const eventsList = [];
+    const route = useRoute();
+
     return {
+      currentRoute: this.$route.path,  // Initial route
+      eventsList,
       user
     };
+  },
+  watch: {
+    '$route.path'(newPath) {
+      this.currentRoute = newPath;
+    }
   },
   created() {
     const user = JSON.parse(localStorage.getItem("user") ?? "null");
@@ -171,7 +210,19 @@ export default defineComponent({
         localStorage.removeItem('user');
         this.$router.push('/');
       });
-    }
+    },
+    getEvents() {
+      api.get('/eventos/topEvents/4').then(res => {
+        const events = res.data.map((eventData: any) => new Event(eventData));
+        console.log(events);
+        this.eventsList = events;
+      }).catch(error => {
+        console.error("Error fetching events:", error);
+      })
+    },
+  },
+  mounted() {
+    this.getEvents();
   }
 });
 </script>
@@ -214,5 +265,9 @@ ion-item-divider {
 ion-route-outlet {
   height: 100%;
   width: 100%;
+}
+.active-link {
+  color: var(--ion-color-primary);
+  font-weight: bold;
 }
 </style>

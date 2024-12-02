@@ -1,9 +1,12 @@
 <template>
   <ion-page>
     <ion-grid class="d-flex flex-column" style="height: 100%; overflow: auto; width:100%!important;">
-      <InfoHeader title="Artigos" subtitle="Artigos legais para você" image="/woman_wearing_glasses.png"/>
-      <ion-row v-if="user.isCreatorType()" id="modalCreateRow" class="ion-justify-content-end">
-        <ion-button class="ion-padding-vertical text-white" fill="solid" @click="setOpen(true)" expand="block">Criar Artigo</ion-button>
+      <InfoHeader title="Artigos" subtitle="Descubra insights e tendências do mercado de tecnologia." image="/woman_wearing_glasses.png"/>
+      <ion-row v-if="user.isCreatorType()" id="modalCreateRow" class="ion-justify-content-start">
+        <ion-button class="ion-padding-vertical text-white" fill="solid" @click="setOpen(true)" expand="block">
+          Criar Artigo
+          <ion-icon name="add-outline" slot="start"></ion-icon>
+        </ion-button>
       </ion-row>
       <ion-row>
         <div class="ion-padding ion-margin">
@@ -81,13 +84,19 @@
           </ion-item>
           <br>
           <ion-item>
-            <ion-input
+            <ion-select
+                interface="popover"
                 v-model="artigoModel.categoria"
                 label="Categoria"
                 label-placement="floating"
-                type="text"
-                placeholder="Digite a categoria do artigo"
-            ></ion-input>
+                placeholder="Selecione a categoria do artigo"
+            >
+              <ion-select-option value="Desenvolvimento">Desenvolvimento</ion-select-option>
+              <ion-select-option value="Inteligência Artificial">Inteligência Artificial</ion-select-option>
+              <ion-select-option value="Cybersegurança">Cybersegurança</ion-select-option>
+              <ion-select-option value="Data Science">Data Science</ion-select-option>
+              <ion-select-option value="DevOps">DevOps</ion-select-option>
+            </ion-select>
           </ion-item>
           <br>
           <ion-item>
@@ -136,7 +145,7 @@ import {
   IonRow,
   IonText,
   IonModal,
-  IonIcon, IonInput, IonItem, IonList
+  IonIcon, IonInput, IonItem, IonList, IonSelect, IonSelectOption
 } from '@ionic/vue';
 import api from "@/services/axios";
 import {Article} from "@/models/Article";
@@ -156,7 +165,7 @@ export default defineComponent({
     IonHeader, IonToolbar, IonButtons, IonButton, IonTitle,
     IonContent,
     ArticleCard,
-    IonModal
+    IonModal, IonSelect, IonSelectOption
   },
   data() {
     const articleList = [];

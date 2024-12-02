@@ -33,6 +33,11 @@ class Usuario extends Authenticatable
         return 'id';
     }
 
+    public function getFotoAttribute($value)
+    {
+        return !empty($value) ? $value : "user.png";
+    }
+
 
     // Relacionamento de um usuário para muitos artigos
     public function artigos()

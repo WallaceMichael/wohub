@@ -19,7 +19,7 @@ class CreateEventosTable extends Migration
             $table->text('descricao_curta')->nullable();
             $table->text('descricao')->nullable();
             $table->string('categoria')->nullable();
-            $table->string('link')->nullable();
+            $table->text('link')->nullable();
             $table->enum('tipo_evento', ['palestra', 'workshop', 'hackathon'])->default('palestra');
             $table->foreignId('usuarios_id')->constrained('usuarios')->onDelete('cascade');
             $table->dateTime('data_evento')->nullable();

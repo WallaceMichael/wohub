@@ -10,6 +10,7 @@ export class Event {
     tipo_evento: string;
     usuario: User;
     data_evento: string;
+    inscricoes_count: number;
 
     constructor(data: Partial<Event>) {
         this.id = data.id ?? 0;
@@ -19,6 +20,7 @@ export class Event {
         this.link = data.link ?? '';
         this.foto = data.foto ?? '';
         this.tipo_evento = data.tipo_evento ?? '';
+        this.inscricoes_count = data.inscricoes_count ?? 0;
         this.usuario = new User(data.usuario ?? {});
         this.data_evento = this.formatDate(data.data_evento ?? '');
     }

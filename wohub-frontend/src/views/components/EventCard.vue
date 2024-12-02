@@ -81,7 +81,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <ion-card>
+  <ion-card style="height:100%;">
     <img :src="event.foto" style="height: 220px;object-fit:cover;" />
     <ion-card-header>
       <ion-card-subtitle class="text-category">{{event.data_evento}}</ion-card-subtitle>

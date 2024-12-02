@@ -35,7 +35,8 @@ import {
     arrowBackOutline,
     arrowBackCircle,
     arrowBackCircleOutline,
-    closeCircleOutline
+    closeCircleOutline,
+    addOutline
 } from 'ionicons/icons';
 import {addIcons} from 'ionicons';
 
@@ -54,7 +55,8 @@ addIcons({
     arrowBackOutline,
     arrowBackCircle,
     arrowBackCircleOutline,
-    closeCircleOutline
+    closeCircleOutline,
+    addOutline
 });
 
 router.isReady().then(() => {

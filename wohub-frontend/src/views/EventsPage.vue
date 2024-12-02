@@ -1,16 +1,33 @@
 <template>
   <ion-page>
     <ion-grid class="d-flex flex-column" style="height: 100%; overflow: auto; width:100%!important;">
-      <InfoHeader title="Eventos" subtitle="Eventos legais para você" image="/woman_wearing_glasses.png"/>
-      <ion-row v-if="user.isCreatorType()" id="modalCreateRow" class="ion-justify-content-end">
-        <ion-button class="ion-padding-vertical text-white" fill="solid" @click="setOpen(true)" expand="block">Criar
-          Evento
-        </ion-button>
+      <InfoHeader title="Eventos"
+                  subtitle="Explore eventos incríveis que conectam e capacitam mulheres na tecnologia. Participe e dê o próximo passo em sua jornada profissional!"
+                  image="/woman_wearing_glasses.png"/>
+      <ion-row v-if="user.isCreatorType()" id="modalCreateRow" class="ion-justify-content-between">
+        <ion-col size="auto">
+          <ion-button class="ion-padding-vertical text-white" fill="solid" @click="setOpen(true)" expand="block">
+            Criar Evento
+            <ion-icon name="add-outline" slot="start"></ion-icon>
+          </ion-button>
+        </ion-col>
+
+        <ion-col size="2">
+          <ion-item>
+            <ion-select v-model="filtro" interface="popover" label="Filtrar" label-placement="floating">
+              <ion-select-option value="all">Todos</ion-select-option>
+              <ion-select-option value="hackathon">Hackathon</ion-select-option>
+              <ion-select-option value="palestra">Palestra</ion-select-option>
+              <ion-select-option value="workshop">Workshop</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+
       </ion-row>
       <ion-row>
         <div class="ion-padding ion-margin">
           <ion-row>
-            <ion-col size="12" size-sm="6" size-md="6" size-lg="3" v-for="event in eventsList" :key="event.id">
+            <ion-col size="12" size-sm="6" size-md="6" size-lg="3" v-for="event in filteredEvents" :key="event.id">
               <EventCard :event="event"/>
             </ion-col>
           </ion-row>
@@ -52,13 +69,19 @@
           </ion-item>
           <br>
           <ion-item>
-            <ion-input
+            <ion-select
+                interface="popover"
                 v-model="eventoModel.categoria"
                 label="Categoria"
                 label-placement="floating"
-                type="text"
-                placeholder="Digite a categoria do evento"
-            ></ion-input>
+                placeholder="Selecione a categoria dos eventos"
+            >
+              <ion-select-option value="Desenvolvimento">Desenvolvimento</ion-select-option>
+              <ion-select-option value="Inteligência Artificial">Inteligência Artificial</ion-select-option>
+              <ion-select-option value="Cybersegurança">Cybersegurança</ion-select-option>
+              <ion-select-option value="Data Science">Data Science</ion-select-option>
+              <ion-select-option value="DevOps">DevOps</ion-select-option>
+            </ion-select>
           </ion-item>
           <br>
           <ion-item>
@@ -82,21 +105,24 @@
           </ion-item>
           <br>
           <ion-item>
-            <ion-select v-model="eventoModel.tipo_evento" style="padding-right: 0.5em!important;" label="Tipo do evento"
+            <ion-select interface="popover" v-model="eventoModel.tipo_evento" style="padding-right: 0.5em!important;"
+                        label="Tipo do evento"
                         label-placement="floating" placeholder="Digite o tipo do evento">
-              <ion-select-option value="palestra">Palestra</ion-select-option>
-              <ion-select-option value="workshop">Workshop</ion-select-option>
-              <ion-select-option value="hackathon">Hackathon</ion-select-option>
+              <ion-select-option value="Palestra">Palestra</ion-select-option>
+              <ion-select-option value="Workshop">Workshop</ion-select-option>
+              <ion-select-option value="Hackathon">Hackathon</ion-select-option>
             </ion-select>
           </ion-item>
           <br>
           <ion-item>
-            <ion-input type="datetime-local" v-model="eventoModel.data_evento" label="Data do evento" label-placement="floating"
+            <ion-input type="datetime-local" v-model="eventoModel.data_evento" label="Data do evento"
+                       label-placement="floating"
                        placeholder="Digite a data do evento"></ion-input>
           </ion-item>
           <br>
           <ion-item>
-            <ion-button @click="onClickCreateEvent" :disabled="isCreateButtonDisabled" class="ion-padding-vertical text-white" fill="solid" expand="block"
+            <ion-button @click="onClickCreateEvent" :disabled="isCreateButtonDisabled"
+                        class="ion-padding-vertical text-white" fill="solid" expand="block"
                         style="width: 100%!important;">Criar Evento
             </ion-button>
           </ion-item>
@@ -147,6 +173,7 @@ export default defineComponent({
     const eventsList = [];
     const isModalOpen = false;
     let user;
+    const filtro = "all";
     const eventoModel = {
       titulo: "",
       descricao: "",
@@ -160,12 +187,21 @@ export default defineComponent({
     const isCreateButtonDisabled = false;
 
     return {
+      filtro,
       user,
       isCreateButtonDisabled,
       eventoModel,
       isModalOpen,
       eventsList
     }
+  },
+  computed: {
+    filteredEvents() {
+      if (this.filtro === 'all') {
+        return this.eventsList;
+      }
+      return this.eventsList.filter((event) => event.tipo_evento.toLowerCase() === this.filtro);
+    },
   },
   methods: {
     onClickCreateEvent() {
@@ -190,7 +226,9 @@ export default defineComponent({
       this.createEvent();
     },
     createEvent() {
-      api.post('/eventos', this.eventoModel).then(res => {
+      const dataModel = this.eventoModel;
+      dataModel.tipo_evento = dataModel.tipo_evento.toLowerCase();
+      api.post('/eventos', dataModel).then(res => {
         console.log(res.data);
         alert("Evento criado com sucesso!");
         window.location.reload();

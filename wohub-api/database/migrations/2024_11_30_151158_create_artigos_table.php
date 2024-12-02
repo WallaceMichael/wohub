@@ -18,7 +18,7 @@ class CreateArtigosTable extends Migration
             $table->string('descricao_curta')->nullable();
             $table->text('descricao')->nullable();
             $table->string('categoria')->nullable();
-            $table->string('link')->nullable();
+            $table->text('link')->nullable();
             $table->string('foto')->nullable();
             $table->foreignId('usuarios_id')->constrained('usuarios')->onDelete('cascade');
             $table->timestamps();

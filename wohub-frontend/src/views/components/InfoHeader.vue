@@ -29,8 +29,8 @@ export default defineComponent({
         <div id="background_screen">
           <ion-row style="height: 100%">
             <ion-col id="background_screen_text" size="7">
-              <ion-text style="color: white"><h1>{{ $props.title }}</h1></ion-text>
-              <ion-text style="color: white"><h6>{{ $props.subtitle }}</h6></ion-text>
+              <ion-text style="color: white"><h1 style="font-size:48px!important;">{{ $props.title }}</h1></ion-text>
+              <ion-text style="color: white"><h6 >{{ $props.subtitle }}</h6></ion-text>
             </ion-col>
             <ion-col size="5">
               <ion-img id="background_screen_img" :src="$props.image"></ion-img>

@@ -10,7 +10,7 @@ class CursoController extends Controller
 // Display a listing of the resource.
     public function index()
     {
-        $cursos = Curso::with("usuario")->get();
+        $cursos = Curso::with("usuario")->orderBy('id', 'desc')->get();
 
         if ($cursos->isEmpty()) {
             return response()->json([], 404);

@@ -44,20 +44,20 @@ export default defineComponent({
 <template>
   <ion-page>
     <ion-grid class="d-flex flex-column" style="height: 100%; overflow: auto; width:100%!important;">
-      <InfoHeader title="Eventos" subtitle="Eventos legais para você" image="/woman_wearing_glasses.png" />
-      <ion-row>
-        <div class="ion-padding ion-margin">
-          <ion-row v-if="eventsList && eventsList.length > 0">
+      <InfoHeader title="Eventos" subtitle="Acompanhe seus eventos favoritos em um só lugar. Gerencie inscrições e não perca nenhuma oportunidade!" image="/woman_wearing_glasses.png" />
+      <ion-row v-if="eventsList && eventsList.length > 0" style="flex-grow:1!important;">
+        <div class="ion-padding ion-margin" style="flex-grow:1!important;">
+          <ion-row>
             <ion-col size="12" size-sm="6" size-md="6" size-lg="3" v-for="event in eventsList" :key="event.id">
               <EventCard :event="event"/>
             </ion-col>
           </ion-row>
-          <ion-row v-else-if="eventsList && eventsList.length == 0">
-            <ion-col size="12">
-              <ion-text color="medium">Você não está inscrito(a) em nenhum evento!</ion-text>
-            </ion-col>
-          </ion-row>
         </div>
+      </ion-row>
+      <ion-row v-else-if="eventsList && eventsList.length == 0">
+        <ion-col size="12">
+          <ion-text color="medium">Você não está inscrito(a) em nenhum evento!</ion-text>
+        </ion-col>
       </ion-row>
     </ion-grid>
   </ion-page>

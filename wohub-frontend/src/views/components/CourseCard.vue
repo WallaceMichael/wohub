@@ -98,7 +98,7 @@ export default defineComponent({
   text-overflow: ellipsis;
 }
 
-.text-title{
+.text-title {
   font-size: 20px;
   font-weight: 700;
   line-height: 22px;
@@ -106,23 +106,26 @@ export default defineComponent({
   text-underline-position: from-font;
   text-decoration-skip-ink: none;
   display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  -webkit-line-clamp: 2; /* Limits the text to 2 lines */
+  -webkit-box-orient: vertical; /* Ensures the box behaves vertically */
+  overflow: hidden; /* Hides overflow text */
+  text-overflow: ellipsis; /* Adds "..." to truncated text */
+  max-height: calc(22px * 2); /* Enforces a maximum height of 2 lines */
+  min-height: calc(22px * 2); /* Enforces a minimum height of 2 lines */
 }
-
-.text-description{
+.text-description {
   font-size: 16px;
   font-weight: 400;
-  line-height: 22.4px;
+  line-height: 22.4px; /* Line height should match the line spacing */
   text-align: left;
   text-underline-position: from-font;
   text-decoration-skip-ink: none;
   display: -webkit-box;
-  -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  -webkit-line-clamp: 4; /* Restrict the content to 4 lines */
+  -webkit-box-orient: vertical; /* Orient the box vertically */
+  overflow: hidden; /* Hide overflowing content */
+  text-overflow: ellipsis; /* Display "..." for truncated text */
+  max-height: calc(22.4px * 4); /* Restrict maximum height to 4 lines */
+  min-height: calc(22.4px * 4); /* Ensure minimum height is also 4 lines */
 }
 </style>

@@ -11,7 +11,7 @@ class ArtigosController extends Controller
     // Display a listing of the resource.
     public function index()
     {
-        $artigos = Artigo::with('usuario', 'comentarios.usuario')->get();
+        $artigos = Artigo::with('usuario', 'comentarios.usuario')->orderBy('id', 'desc')->get();
         if ($artigos->isEmpty()) {
             return response()->json([], 404);
         }

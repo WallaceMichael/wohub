@@ -74,7 +74,7 @@
 
                       <ion-col size="12">
                         <ion-item>
-                          <ion-select class="ms-2" label="Tipo de Usuário" label-placement="floating"
+                          <ion-select interface="popover" class="ms-2" label="Tipo de Usuário" label-placement="floating"
                                       v-model="tipo_usuario" placeholder="Selecione o tipo de usuário">
                             <ion-select-option value="1">Consumidor</ion-select-option>
                             <ion-select-option value="2">Criador</ion-select-option>
